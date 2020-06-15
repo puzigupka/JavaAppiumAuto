@@ -121,7 +121,7 @@ public class FirstTest {
 у
     }*/
 
-    @Test
+  /*  @Test
     public void testHomeWorkSearch()
     {
         waitForElementAndClick(
@@ -140,6 +140,47 @@ public class FirstTest {
                 "Search…",
                 article_title
         );
+    }*/
+
+
+    @Test
+    public void testHomeWorkCancelSearch()
+    {
+        waitForElementAndClick(
+                By.id("org.wikipedia:id/search_container"),
+                "Cannot find 'Search Wikipedia' input",
+                5
+        );
+        waitForElementAndSendKeys(
+                By.xpath("//*[contains(@text,'Search…')]"),
+                "Apple",
+                "Cannot find search input",
+                5
+        );
+        waitForElement(
+                By.xpath("//*[@resource-id='org.wikipedia:id/page_list_item_container']//*[@text='Apple']"),
+                "Cannot find 'Search Wikipedia' input",
+                5
+        );
+
+        waitForElementAndClick(
+                By.id("org.wikipedia:id/search_close_btn"),
+                "Cannot find X to cancel search",
+                5
+        );
+
+        waitForElementAndClick(
+                By.id("org.wikipedia:id/search_close_btn"),
+                "Cannot find X to cancel search",
+                5
+        );
+
+        waitForElementNotPresent(
+                By.id("org.wikipedia:id/search_close_btn"),
+                "X is still present on the page",
+                5
+        );
+
     }
 
 
@@ -184,6 +225,12 @@ public class FirstTest {
     {
         WebElement element = waitForElementPresent(by,error_message, timeoutInSeconds);
         element.clear();
+        return element;
+    }
+
+    private WebElement waitForElement(By by, String error_massage, long timeoutInSeconds)
+    {
+        WebElement element = waitForElementPresent(by, error_massage,timeoutInSeconds);
         return element;
     }
 
